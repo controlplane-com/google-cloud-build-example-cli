@@ -1,0 +1,15 @@
+steps:
+- name: "gcr.io/cloud-builders/docker"
+  entrypoint: "bash"
+  args: ["./cpln.bash"]
+  secretEnv: ["CPLN_TOKEN"]
+  env:
+    - "IMAGE=${_CPLN_IMAGE_NAME}:$SHORT_SHA"
+    - "CPLN_ORG=${_CPLN_ORG}"
+    - "CPLN_GVC_NAME=${_CPLN_GVC_NAME}"
+    - "CPLN_WORKLOAD_NAME=${_CPLN_WORKLOAD_NAME}"
+availableSecrets:
+  secretManager:
+  - versionName: projects/PROJECT_ID/secrets/CPLN_TOKEN/versions/latest
+    env: "CPLN_TOKEN"
+
